@@ -1,0 +1,34 @@
+version: '2'
+
+services:
+
+  db:
+    build: db
+#   ports:
+#     - 3300:3306
+    restart: always
+    volumes:
+      - tally-data:/var/lib/mysql
+    environment:
+      - MYSQL_PASSWORD=tally_password
+
+  api:
+    build: api
+    depends_on:
+      - db
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - MYSQL_PASSWORD=tally_password
+
+  web:
+    build: web
+    ports:
+      - 3000:80
+    restart: always
+
+volumes:
+  tally-data:
+    driver: local
+  tally-backup:
+    driver: local

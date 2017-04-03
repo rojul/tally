@@ -27,6 +27,18 @@ services:
       - 3000:80
     restart: always
 
+  db-backup:
+    build:
+      context: db
+      dockerfile: Dockerfile.backup
+    restart: always
+    volumes:
+      - tally-backup:/backup
+    environment:
+      - MYSQL_PASSWORD=tally_password
+    depends_on:
+      - db
+
 volumes:
   tally-data:
     driver: local

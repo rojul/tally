@@ -1,7 +1,8 @@
 FROM mariadb:10.1.17
 
-ENV MYSQL_USER=tally
-ENV MYSQL_RANDOM_ROOT_PASSWORD=yes
+ENV MYSQL_USER=tally \
+    MYSQL_RANDOM_ROOT_PASSWORD=yes \
+    MYSQL_DATABASE=tally
 
 COPY dump.sql /docker-entrypoint-initdb.d/
 

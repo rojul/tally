@@ -1,0 +1,13 @@
+FROM mariadb:10.1.17
+
+WORKDIR /backup
+RUN apt-get update && apt-get install -y --no-install-recommends \
+		cron \
+    && rm -rf /var/lib/apt/lists/*
+RUN echo 'echo Starting backup $(date +%Y-%m-%d\ %H:%M)\n\
+    mysqldump -hdb -utally -p$(cat /tmp/MYSQL_PASSWORD) -A > /backup/tally_$(date +%Y-%m-%d_%H-%M).sql\n\
+    find /backup -name '*' -type f -mtime +60 -delete' > /backup.sh \
+		&& echo '0 0 * * * root sh /backup.sh >> /proc/1/fd/1 2>&1' > /etc/cron.d/backup-cron
+
+CMD echo ${MYSQL_PASSWORD} > /tmp/MYSQL_PASSWORD \
+    && cron -f

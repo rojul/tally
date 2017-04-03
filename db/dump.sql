@@ -1,7 +1,3 @@
-CREATE DATABASE `tally`;
-GRANT SELECT,INSERT,UPDATE,DELETE ON tally.* TO 'tally'@'%';
-USE `tally`;
-
 CREATE TABLE `config` (
   `key` varchar(255) NOT NULL,
   `value` varchar(255) NOT NULL,

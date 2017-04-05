@@ -64,4 +64,37 @@ describe('config', function () {
       })
     })
   })
+  describe('put title', function () {
+    it('success', async function () {
+      let res = await request.put('/api/config/title')
+        .send({ value: 'New title' })
+      expect(res.statusCode).to.equal(200)
+      expect(res.body).to.deep.equal({})
+
+      res = await request.get('/api/config')
+      expect(res.statusCode).to.equal(200)
+      expect(res.body.title).to.equal('New title')
+    })
+    it('empty', async function () {
+      let res = await request.put('/api/config/title')
+        .send({ value: '' })
+      expect(res.statusCode).to.equal(400)
+    })
+    it('no value', async function () {
+      let res = await request.put('/api/config/title')
+        .send({})
+      expect(res.statusCode).to.equal(400)
+    })
+  })
+  describe('remove title', function () {
+    it('success', async function () {
+      let res = await request.delete('/api/config/title')
+      expect(res.statusCode).to.equal(200)
+      expect(res.body).to.deep.equal({})
+
+      res = await request.get('/api/config')
+      expect(res.statusCode).to.equal(200)
+      expect(res.body.title).to.equal('Tally')
+    })
+  })
 })

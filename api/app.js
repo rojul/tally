@@ -1,8 +1,6 @@
 const log4js = require('log4js')
 const express = require('express')
 
-const config = require('./config')
-const db = require('./db')
 const api = require('./routes/api')
 
 let app = express()

@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "test": "mocha --harmony-async-await '**/*.spec.js'"
+    "test": "mocha --harmony-async-await '**/*.spec.js'",
+    "standard": "standard --env mocha --fix"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -20,6 +21,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
+    "standart": "^6.1.0",
     "supertest": "^2.0.1",
     "supertest-as-promised": "^4.0.2"
   }

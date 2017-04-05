@@ -7,7 +7,6 @@ const validator = require('validator')
 
 const version = require('../package.json').version
 const config = require('../config')
-const db = require('../db')
 const users = require('./users')
 const products = require('./products')
 const metrics = require('./metrics')

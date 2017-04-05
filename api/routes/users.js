@@ -1,11 +1,8 @@
-const log4js = require('log4js')
 const express = require('express')
 
 const config = require('../config')
 const db = require('../db')
 const userTransactions = require('./user-transactions')
-
-let logger = log4js.getLogger('api')
 
 let router = express.Router()
 

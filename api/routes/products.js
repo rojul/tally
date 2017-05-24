@@ -6,7 +6,11 @@ const db = require('../db')
 let router = express.Router()
 
 router.get('/', (req, res, next) => {
-  db.query('SELECT id, name, price FROM product').then(products => {
+  db.query('SELECT id, name, price, fun FROM product').then(products => {
+    products.map(product => {
+      product.fun = Boolean(product.fun)
+      return product
+    })
     res.json({ products })
   }).catch(err => {
     next(err)
@@ -23,6 +27,10 @@ const validateProductSchema = {
     isInt: {
       options: [{ min: 1, max: config.transactionMaxValue }]
     }
+  },
+  fun: {
+    isBoolean: true,
+    optional: true
   }
 }
 
@@ -37,7 +45,8 @@ router.post('/', (req, res, next) => {
 
   let product = {
     name: req.body.name,
-    price: req.body.price
+    price: req.body.price,
+    fun: req.body.fun || false
   }
   db.query('INSERT INTO product SET ?', [product]).then(rows => {
     res.json({
@@ -65,7 +74,8 @@ router.put('/:productId', (req, res, next) => {
 
   let product = {
     name: req.body.name,
-    price: req.body.price
+    price: req.body.price,
+    fun: req.body.fun
   }
   db.query('UPDATE product SET ? WHERE ?', [product, { id: req.params.productId }]).then(rows => {
     if (rows.affectedRows === 1) {

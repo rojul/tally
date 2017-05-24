@@ -24,6 +24,12 @@ describe('products', function () {
       expect(res.statusCode).to.equal(200)
       expect(res.body.productId).to.be.a('number')
     })
+    it('success with fun', async function () {
+      let res = await request.post('/api/products')
+        .send({ name: 'create product with fun success', price: 100, fun: true })
+      expect(res.statusCode).to.equal(200)
+      expect(res.body.productId).to.be.a('number')
+    })
     it('no price', async function () {
       let res = await request.post('/api/products')
         .send({ name: 'create product no price' })
@@ -45,6 +51,11 @@ describe('products', function () {
       expect(res.statusCode).to.equal(400)
       res = await request.post('/api/products')
         .send({ name: 'create product price to small2', price: -1 })
+      expect(res.statusCode).to.equal(400)
+    })
+    it('invalid fun', async function () {
+      let res = await request.post('/api/products')
+        .send({ name: 'create product with invalid fun', price: 100, fun: 'true' })
       expect(res.statusCode).to.equal(400)
     })
   })

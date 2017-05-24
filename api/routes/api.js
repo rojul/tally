@@ -35,6 +35,9 @@ router.use(expressValidator({
       return !!values && values.every(function (val) {
         return validator.isInt(val, prop)
       })
+    },
+    isBoolean: (values, prop) => {
+      return typeof (values) === 'boolean'
     }
   }
 }))

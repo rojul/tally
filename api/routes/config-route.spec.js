@@ -1,5 +1,5 @@
 const { expect } = require('chai')
-const supertest = require('supertest-as-promised')
+const supertest = require('supertest')
 
 const testUtils = require('../test-utils')
 const app = require('../app')
@@ -95,6 +95,28 @@ describe('config', function () {
       res = await request.get('/api/config')
       expect(res.statusCode).to.equal(200)
       expect(res.body.title).to.equal('Tally')
+    })
+  })
+  describe('put funChanceToWin', function () {
+    it('success', async function () {
+      let res = await request.put('/api/config/funChanceToWin')
+        .send({ value: 20 })
+      expect(res.statusCode).to.equal(200)
+      expect(res.body).to.deep.equal({})
+
+      res = await request.get('/api/config')
+      expect(res.statusCode).to.equal(200)
+      expect(res.body.funChanceToWin).to.equal(20)
+    })
+    it('invalid int', async function () {
+      let res = await request.put('/api/config/funChanceToWin')
+        .send({ value: 'A' })
+      expect(res.statusCode).to.equal(400)
+    })
+    it('negative int', async function () {
+      let res = await request.put('/api/config/funChanceToWin')
+        .send({ value: -1 })
+      expect(res.statusCode).to.equal(400)
     })
   })
 })

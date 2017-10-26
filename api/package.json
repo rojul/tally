@@ -1,6 +1,6 @@
 {
   "name": "tally",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "",
   "main": "index.js",
@@ -22,7 +22,6 @@
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
     "standart": "^6.1.0",
-    "supertest": "^2.0.1",
-    "supertest-as-promised": "^4.0.2"
+    "supertest": "^2.0.1"
   }
 }

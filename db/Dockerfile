@@ -1,11 +1,10 @@
-FROM mariadb:10.1.17
+FROM mariadb:10.3
 
 ENV MYSQL_USER=tally \
-    MYSQL_RANDOM_ROOT_PASSWORD=yes \
     MYSQL_DATABASE=tally
 
 COPY dump.sql /docker-entrypoint-initdb.d/
 
-HEALTHCHECK CMD mysql -utally -p${MYSQL_PASSWORD} -Dtally -e'select 1+1;'
+HEALTHCHECK CMD mysql -u$MYSQL_USER -p$MYSQL_PASSWORD -D$MYSQL_DATABASE -e'select 1+1;'
 
 EXPOSE 3306

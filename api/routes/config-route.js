@@ -19,6 +19,10 @@ const configDefaults = {
   },
   theme: {
     default: 'default'
+  },
+  funChanceToWin: {
+    default: 0,
+    parse: true
   }
 }
 
@@ -76,6 +80,22 @@ for (let route of ['title', 'theme']) {
       return res.status(400).json({ errors })
     }
     let value = req.body.value
+    updateConfig(req, res, next, route, value)
+  })
+
+  router.delete('/' + route, (req, res, next) => {
+    updateConfig(req, res, next, route)
+  })
+}
+
+for (let route of ['funChanceToWin']) {
+  router.put('/' + route, (req, res, next) => {
+    req.checkBody('value').isInt({ min: 0 })
+    let errors = req.validationErrors()
+    if (errors) {
+      return res.status(400).json({ errors })
+    }
+    let value = Number(req.body.value)
     updateConfig(req, res, next, route, value)
   })
 

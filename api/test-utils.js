@@ -1,4 +1,4 @@
-const supertest = require('supertest-as-promised')
+const supertest = require('supertest')
 
 const app = require('./app')
 const db = require('./db')

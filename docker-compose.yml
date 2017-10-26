@@ -5,12 +5,13 @@ services:
   db:
     build: db
 #   ports:
-#     - 3300:3306
+#     - 127.0.0.1:3306:3306
     restart: always
     volumes:
       - tally-data:/var/lib/mysql
     environment:
       - MYSQL_PASSWORD=tally_password
+      - MYSQL_ROOT_PASSWORD=tally_root_password
 
   api:
     build: api
@@ -18,13 +19,12 @@ services:
       - db
     restart: always
     environment:
-      - NODE_ENV=production
       - MYSQL_PASSWORD=tally_password
 
   web:
     build: web
     ports:
-      - 3000:80
+      - 80:80
     restart: always
 
   db-backup:

@@ -1,5 +1,5 @@
 const { expect } = require('chai')
-const supertest = require('supertest-as-promised')
+const supertest = require('supertest')
 
 const testUtils = require('../test-utils')
 const app = require('../app')

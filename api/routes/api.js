@@ -32,12 +32,15 @@ router.use(expressValidator({
   },
   customValidators: {
     isIntArray: (values, prop) => {
-      return !!values && values.every(function (val) {
-        return validator.isInt(val, prop)
+      return !!values && values.every(value => {
+        return validator.isInt(value, prop)
       })
     },
-    isBoolean: (values, prop) => {
-      return typeof (values) === 'boolean'
+    isBoolean: (value, prop) => {
+      return typeof value === 'boolean'
+    },
+    isInt: (value, prop) => {
+      return validator.isInt(value, prop)
     }
   }
 }))

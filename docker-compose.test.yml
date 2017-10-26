@@ -2,17 +2,18 @@ version: '2'
 
 services:
 
-  db:
+  db-test:
     build: db
     environment:
       - MYSQL_PASSWORD=test_password
+      - MYSQL_ROOT_PASSWORD=test_root_password
 
-  api:
+  api-test:
     build:
       context: api
       dockerfile: Dockerfile.test
     depends_on:
       - db
     environment:
-      - NODE_ENV=test
       - MYSQL_PASSWORD=test_password
+      - MYSQL_HOST=db-test

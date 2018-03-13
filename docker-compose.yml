@@ -17,15 +17,11 @@ services:
     build: api
     depends_on:
       - db
-    restart: always
-    environment:
-      - MYSQL_PASSWORD=tally_password
-
-  web:
-    build: web
     ports:
       - 80:80
     restart: always
+    environment:
+      - MYSQL_PASSWORD=tally_password
 
   db-backup:
     build:

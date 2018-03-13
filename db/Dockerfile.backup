@@ -1,4 +1,4 @@
-FROM mariadb:10.3
+FROM mariadb:10.2
 
 WORKDIR /backup
 RUN apt-get update && apt-get install -y --no-install-recommends \

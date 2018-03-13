@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS `tally`;
+USE `tally`;
+
 CREATE TABLE `config` (
   `key` varchar(255) NOT NULL,
   `value` varchar(255) NOT NULL,

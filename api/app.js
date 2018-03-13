@@ -17,6 +17,7 @@ if (process.env.NODE_ENV === undefined) {
 let logger = log4js.getLogger('app')
 
 app.use('/api', api)
+app.use(express.static('dist'))
 
 app.all('*', (req, res) => {
   res.status(404).send('404 Not found')

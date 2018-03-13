@@ -16,10 +16,10 @@ logs-new:
 	docker-compose logs -f --tail 0
 
 test-up: down
-	docker-compose -f docker-compose.test.yml up --build -d db
+	docker-compose -f docker-compose.test.yml up --build -d db-test
 
 test:
-	docker-compose -f docker-compose.test.yml up --build api
+	docker-compose -f docker-compose.test.yml up --build api-test
 
 test-down:
 	docker-compose -f docker-compose.test.yml down

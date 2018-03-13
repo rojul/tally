@@ -1,4 +1,4 @@
-FROM mariadb:10.3
+FROM mariadb:10.2
 
 ENV MYSQL_USER=tally \
     MYSQL_DATABASE=tally

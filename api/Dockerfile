@@ -1,12 +1,12 @@
-FROM node:7-alpine
+FROM node:8.10-alpine
 
 WORKDIR /usr/src/app
 
 ENV NODE_ENV=production
-COPY package.json .
+COPY package.json package-lock.json ./
 RUN npm install --production
 COPY . .
 
-HEALTHCHECK CMD [ "wget", "-s", "http://localhost:80/api/health" ]
+HEALTHCHECK CMD [ "wget", "--spider", "http://127.0.0.1/api/health" ]
 
 CMD [ "npm", "start" ]

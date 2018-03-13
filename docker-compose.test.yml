@@ -13,7 +13,7 @@ services:
       context: api
       dockerfile: Dockerfile.test
     depends_on:
-      - db
+      - db-test
     environment:
       - MYSQL_PASSWORD=test_password
       - MYSQL_HOST=db-test

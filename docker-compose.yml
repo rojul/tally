@@ -4,8 +4,8 @@ services:
 
   db:
     build: db
-#   ports:
-#     - 127.0.0.1:3306:3306
+    # ports:
+    #   - 127.0.0.1:3306:3306
     restart: always
     volumes:
       - tally-data:/var/lib/mysql
@@ -17,11 +17,19 @@ services:
     build: api
     depends_on:
       - db
-    ports:
-      - 80:80
+    # ports:
+    #   - 80:80
     restart: always
     environment:
       - MYSQL_PASSWORD=tally_password
+
+  nginx:
+    build: nginx
+    depends_on:
+      - api
+    ports:
+      - 80:80
+    restart: always
 
   db-backup:
     build:
